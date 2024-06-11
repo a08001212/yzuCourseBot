@@ -29,8 +29,8 @@ class CourseBot:
 
         self.loginUrl = 'https://isdna1.yzu.edu.tw/CnStdSel/Index.aspx'
         self.captchaUrl = 'https://isdna1.yzu.edu.tw/CnStdSel/SelRandomImage.aspx'
-        self.courseListUrl = 'https://isdna1.yzu.edu.tw/CnStdSel/SelCurr/CosList.aspx'
-        self.courseSelectUrl = 'https://isdna1.yzu.edu.tw/CnStdSel/SelCurr/CurrMainTrans.aspx?mSelType=SelCos&mUrl='
+        self.courseListUrl = 'https://isdna1.yzu.edu.tw/CnStdSel/SelSc/CosList.aspx'
+        self.courseSelectUrl = 'https://isdna1.yzu.edu.tw/CnStdSel/SelSc/CurrMainTrans.aspx?mSelType=SelCos&mUrl='
 
         self.loginPayLoad = {
             '__VIEWSTATE': '',
@@ -89,7 +89,7 @@ class CourseBot:
             self.loginPayLoad['Txt_CheckCode'] = captcha
 
             result = self.session.post(self.loginUrl, data= self.loginPayLoad)
-            if ("parent.location ='SelCurr.aspx?Culture=zh-tw'" in result.text): #成功登入訊息可能一直改，挑個不太能改的
+            if ("parent.location ='SelSc.aspx?Culture=zh-tw'" in result.text): #成功登入訊息可能一直改，挑個不太能改的
                 self.log('Login Successful! {}'.format(captcha))
                 break
             elif ("資料庫發生異常" in result.text): # 僅比較成功登入及帳號密碼錯誤的訊息，不確定是否還有其他種情況也符合這個條件
